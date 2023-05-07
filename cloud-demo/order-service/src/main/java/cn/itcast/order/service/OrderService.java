@@ -4,7 +4,6 @@ import cn.itcast.order.mapper.OrderMapper;
 import cn.itcast.order.pojo.Order;
 import cn.itcast.order.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -21,7 +20,10 @@ public class OrderService {
         Order order = orderMapper.findById(orderId);
         //利用restTemplate发怂http请求，查用户
         //需要参数url 和 user类
-        String url = "http://localhost:8081/user/" + order.getUserId();
+        //String url = "http://localhost:8081/user/" + order.getUserId();
+        //上一行的代码硬编码了，换
+        String url = "http://userServer/user/" + order.getUserId();
+
         //发送请求，远端调用
         User user = restTemplate.getForObject(url, User.class);
         //封装user 到order
