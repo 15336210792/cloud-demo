@@ -8,6 +8,12 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
   application:
     name: orderServer
+  cloud:
+    nacos:
+      server-addr: localhost:8848
+      discovery:
+        cluster-name: HZ
+        namespace: eebfde3b-c5ec-4c6f-8648-36282a9020d7
 eureka:
   client:
     service-url:
@@ -25,7 +31,8 @@ logging:
     dateformat: MM-dd HH:mm:ss:SSS
 userServer:
   ribbon:
-    NFLoadBalacerRuleClassName: com.netflix.loadbalancer.RandomRule  #负载均衡规律
+    #NFLoadBalacerRuleClassName: com.netflix.loadbalancer.RandomRule  #负载均衡规律
+    NFLoadBalacerRuleClassName: com.alibaba.cloud.nacos.ribbon.NaconsRule  #负载均衡规律
 ribbon:
   eager-load:
     enabled: true
